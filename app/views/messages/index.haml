@@ -1,0 +1,17 @@
+.container.messages
+  %h1 Messages
+  %p List all the messages that are sent to the customer
+  - if @assets.present?
+    %table.table
+      %tbody
+      - @assets.each do |asset|
+        %tr.asset
+          %td
+            = link_to message_path(asset), target: "_blank" do
+              %span.title= asset.title
+              %br
+              %span.desc=asset.description
+          %td
+            = link_to message_path(asset, page: params[:page]), class: "btn btn-info btn-lg", data: { :confirm => "Are you sure?" }, :method => :delete do
+              %span X
+    = will_paginate @assets
